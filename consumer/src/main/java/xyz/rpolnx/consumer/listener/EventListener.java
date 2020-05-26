@@ -1,31 +1,27 @@
-package xyz.rpolnx.consumer.controller;
+package xyz.rpolnx.consumer.listener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pereira.rodrigo.consumer.contract.UserContract;
-import com.pereira.rodrigo.consumer.model.Customer;
-import com.pereira.rodrigo.consumer.model.CustomerData;
+import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.RestController;
+import xyz.rpolnx.consumer.model.Customer;
+import xyz.rpolnx.consumer.model.CustomerData;
+import xyz.rpolnx.consumer.service.UserService;
 
 @RestController
-public class ConsumerController {
-    private final UserContract userContract;
+@RequiredArgsConstructor
+public class EventListener {
+    private final UserService service;
 
-    @Autowired
-    public ConsumerController(UserContract userContract) {
-        this.userContract = userContract;
-    }
-
-    @RabbitListener(queues = "user")
+    @RabbitListener(queues = "${queue.name}")
     public void receive(@Payload String customer) throws JsonProcessingException {
         CustomerData customerData = new ObjectMapper().readValue(customer, CustomerData.class);
-        userContract.createUser(mapperCustomerData(customerData));
+        service.create(buildCustomerData(customerData));
     }
 
-    private Customer mapperCustomerData(CustomerData customerData) {
+    private Customer buildCustomerData(CustomerData customerData) {
         return Customer.builder()
                 .birthday(customerData.getBirthday())
                 .cpf(customerData.getCpf())
@@ -35,6 +31,4 @@ public class ConsumerController {
                 .name(customerData.getName())
                 .build();
     }
-
-    ;
 }
