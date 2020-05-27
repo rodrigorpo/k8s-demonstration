@@ -1,0 +1,19 @@
+apiVersion: autoscaling/v2beta1
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "producer-1-hpa"
+  namespace: "default"
+  labels:
+    app: "producer-1-hpa"
+spec:
+  minReplicas: 1
+  maxReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: producer
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 90
