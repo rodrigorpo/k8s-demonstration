@@ -1,0 +1,16 @@
+# Service expose
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  type: NodePort
+  clusterIP: 10.106.249.0
+  selector:
+    app: postgres
+  ports:
+  - name: pg-port
+    protocol: TCP
+    port: 5432
+    targetPort: 5432
