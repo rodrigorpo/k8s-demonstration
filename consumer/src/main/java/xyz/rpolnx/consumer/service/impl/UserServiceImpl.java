@@ -1,6 +1,9 @@
 package xyz.rpolnx.consumer.service.impl;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import xyz.rpolnx.consumer.model.Customer;
 import xyz.rpolnx.consumer.repository.UserRepository;
@@ -14,6 +17,8 @@ import java.util.Random;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
+    private final String[] randomNameList = "Nagato,Deidara,Konan,Itachi,Zetsu,Orochimaru,Kisame,Kakuzu,Hidan,Sasori,Obito".split(",");
+
     @Override
     public List<Customer> getAll() {
         return userRepository.findAll();
@@ -26,9 +31,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(Customer customer) {
-        String[] list = new String[]{"Rodrigo", "Maycon", "Rogerio", "Tayrone", "Thiago", "Eduardo"};
-        int index = new Random().nextInt(list.length);
-        customer.setName(list[index]);
+        int index = new Random().nextInt(randomNameList.length);
+        customer.setName(randomNameList[index]);
         userRepository.save(customer);
     }
 
