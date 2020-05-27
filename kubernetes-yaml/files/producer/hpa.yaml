@@ -1,4 +1,4 @@
-apiVersion: "autoscaling/v2beta1"
+apiVersion: autoscaling/v2beta1
 kind: "HorizontalPodAutoscaler"
 metadata:
   name: "producer-1-hpa"
@@ -6,12 +6,12 @@ metadata:
   labels:
     app: "producer-1-hpa"
 spec:
-  scaleTargetRef:
-    kind: "Deployment"
-    name: "producer"
-    apiVersion: "apps/v1"
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: producer
   metrics:
   - type: "Resource"
     resource:

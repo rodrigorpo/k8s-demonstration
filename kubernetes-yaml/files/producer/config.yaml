@@ -1,0 +1,10 @@
+#Config
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: producer-config
+  labels:
+    app: producer
+data:
+  DATA_ENV: "-Ddb.host=postgres.default.svz.cluster.local -Drabbitmq.host=rabbitmq.default.svz.cluster.local"

@@ -20,5 +20,14 @@ spec:
       containers:
       - name: "producer"
         image: "rpolnx/producer"
+        envFrom:
+          - configMapRef:
+              name: producer-config
         ports:
         - containerPort: 8080
+        livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 3
