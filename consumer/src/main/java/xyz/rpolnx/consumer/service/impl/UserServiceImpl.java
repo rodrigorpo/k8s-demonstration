@@ -1,9 +1,6 @@
 package xyz.rpolnx.consumer.service.impl;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import xyz.rpolnx.consumer.model.Customer;
 import xyz.rpolnx.consumer.repository.UserRepository;
