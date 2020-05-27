@@ -1,11 +1,10 @@
 package xyz.rpolnx.consumer.service;
 
+import org.springframework.data.domain.Page;
 import xyz.rpolnx.consumer.model.Customer;
 
-import java.util.List;
-
 public interface UserService {
-    List<Customer> getAll();
+    Page<Customer> getAll(int i, int page);
 
     Customer get(Long id);
 

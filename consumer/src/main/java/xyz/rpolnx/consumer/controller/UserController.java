@@ -1,11 +1,10 @@
 package xyz.rpolnx.consumer.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import xyz.rpolnx.consumer.model.Customer;
 import xyz.rpolnx.consumer.service.UserService;
-
-import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -17,8 +16,9 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(OK)
-    private List<Customer> getUser() {
-        return service.getAll();
+    private Page<Customer> getUser(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+                                   @RequestParam(name = "size", required = false, defaultValue = "50") int size) {
+        return service.getAll(page, size);
     }
 
     @GetMapping("/{id}")
