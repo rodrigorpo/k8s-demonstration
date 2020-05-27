@@ -7,4 +7,4 @@ metadata:
   labels:
     app: producer
 data:
-  DATA_ENV: "-Ddb.host=postgres.default.svz.cluster.local -Drabbitmq.host=rabbitmq.default.svz.cluster.local"
+  DATA_ENV: "-Drabbitmq.host=rabbitmq.default.svc.cluster.local"
