@@ -1,0 +1,3 @@
+CREATE DATABASE k8s;
+\c k8s;
+CREATE SCHEMA k8s;
