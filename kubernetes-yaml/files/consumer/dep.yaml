@@ -19,5 +19,14 @@ spec:
       containers:
       - name: "consumer"
         image: "rpolnx/consumer"
+        envFrom:
+          - configMapRef:
+              name: consumer-config
         ports:
-        - containerPort: 8081
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 3

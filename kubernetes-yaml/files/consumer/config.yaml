@@ -1,0 +1,10 @@
+#Config
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: consumer-config
+  labels:
+    app: consumer
+data:
+  DATA_ENV: "-Ddb.host=postgres.default.svz.cluster.local -Drabbitmq.host=rabbitmq.default.svz.cluster.local"
