@@ -1,0 +1,15 @@
+
+#Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer
+spec:
+  selector:
+    app: consumer
+  type: NodePort
+  ports:
+    - name: consumer
+      protocol: TCP
+      port: 8081
+      targetPort: 8081
