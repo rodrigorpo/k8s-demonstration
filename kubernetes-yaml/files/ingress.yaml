@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+spec:
+  rules:
+  - host: consumer.xyz
+    http:
+      paths:
+      - backend:
+          serviceName: consumer
+          servicePort: 8081
+  - host: producer.xyz
+    http:
+      paths:
+      - backend:
+          serviceName: producer
+          servicePort: 8080
+
+  - host: rabbitmq.xyz
+    http:
+      paths:
+      - backend:
+          serviceName: rabbitmq
+          servicePort: 15672
+
+  - host: postgres.xyz
+    http:
+      paths:
+      - backend:
+          serviceName: postgres
+          servicePort: 5432
+  - host: postgres-web.xyz
+    http:
+      paths:
+      - backend:
+          serviceName: postgres-web
+          servicePort: 5000
+
+#consumer.xyz      192.168.99.115
+#producer.xyz      192.168.99.115
+#rabbitmq.xyz      192.168.99.115
+#postgres.xyz      192.168.99.115
+#postgres-web.xyz  192.168.99.115
