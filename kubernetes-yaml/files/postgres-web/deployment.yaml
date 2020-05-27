@@ -1,0 +1,31 @@
+#Deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-web
+  template:
+    metadata:
+      labels:
+        app: postgres-web
+    spec:
+      containers:
+      - name: pg-admin
+        image: dpage/pgadmin4
+        envFrom:
+          - configMapRef:
+              name: postgres-web-config
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/data/postgres"
+          name: postgres-web-pvc
+      volumes:
+      - name: postgres-web-pvc
+        persistentVolumeClaim:
+          claimName: postgres-web-pvc

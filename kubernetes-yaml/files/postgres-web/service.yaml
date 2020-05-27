@@ -1,0 +1,15 @@
+# Service expose
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-web
+spec:
+  type: NodePort
+  selector:
+    app: postgres-web
+  ports:
+  - name: pg-port
+    protocol: TCP
+    port: 5000
+    targetPort: 80

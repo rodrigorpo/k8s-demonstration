@@ -1,0 +1,11 @@
+#Config
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-web-config
+  labels:
+    app: postgres-web
+data:
+  PGADMIN_DEFAULT_EMAIL: rpolnx
+  PGADMIN_DEFAULT_PASSWORD: pass
