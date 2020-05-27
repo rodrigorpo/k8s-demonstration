@@ -26,7 +26,7 @@ spec:
         - containerPort: 8081
         resources:
           limits:
-            cpu: 500m
+            cpu: 800m
           requests:
             cpu: 200m
         readinessProbe:
