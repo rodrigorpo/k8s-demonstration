@@ -7,14 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AmpqConfiguration {
-    private final String exchange;
-
-    public AmpqConfiguration(@Value("${queue.exchange}") String exchange) {
-        this.exchange = exchange;
-    }
+    @Value("${queue.exchange}")
+    private String exchange;
 
     @Bean
-    Queue queue() {
+    public Queue queue() {
         return new Queue(exchange, true);
     }
 }
