@@ -1,0 +1,15 @@
+
+#Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: producer
+spec:
+  selector:
+    app: producer
+  type: NodePort
+  ports:
+    - name: java
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
